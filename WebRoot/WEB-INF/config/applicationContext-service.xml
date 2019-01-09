@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+		<bean id="provinceMng" class="com.zjht.adv.manager.impl.ProvinceMngImpl"></bean>
+		<bean id="cityMng" class="com.zjht.adv.manager.impl.CityMngImpl"></bean>
+		<bean id="areaMng" class="com.zjht.adv.manager.impl.AreaMngImpl"></bean>
+		<bean id="userMng" class="com.zjht.adv.manager.impl.UserMngImpl"></bean>
+		<bean id="mobileVerifyMng" class="com.zjht.adv.manager.impl.MobileVerifyMngImpl"></bean>
+		<bean id="addressMng" class="com.zjht.adv.manager.impl.AddressMngImpl"></bean>
+		<bean id="informationMng" class="com.zjht.adv.manager.impl.InformationMngImpl"></bean>
+		<bean id="advertiseMng" class="com.zjht.adv.manager.impl.AdvertiseMngImpl"></bean>
+		<bean id="adminLogMng" class="com.zjht.adv.manager.impl.AdminLogMngImpl"></bean>
+		<bean id="roleMng" class="com.zjht.adv.manager.impl.RoleMngImpl"></bean>
+		<bean id="menuMng" class="com.zjht.adv.manager.impl.SysMenuMngImpl"></bean>
+		<bean id="roleMenuMng" class="com.zjht.adv.manager.impl.RoleMenuMngImpl"></bean>
+		<bean id="userRoleMng" class="com.zjht.adv.manager.impl.UserRoleMngImpl"></bean>
+		
+		<bean id="advPositionMng" class="com.zjht.adv.manager.impl.AdvPositionMngImpl"></bean>
+		<bean id="apiChannelMng" class="com.zjht.adv.manager.impl.ApiChannelMngImpl"></bean>
+		<bean id="apiChannelServiceMng" class="com.zjht.adv.manager.impl.ApiChannelServiceImpl"></bean>
+		<context:annotation-config/>
+		<!-- spring工具类 -->
+		<bean id="springContextUtil" class="com.zjht.adv.hprose.util.SpringContextUtil" lazy-init="false"></bean>
+		<!-- hprose 一定要配置了组件扫描后，注解才会生效 -->
+		<!-- hprose业务逻辑处理方法 -->
+		<context:component-scan base-package="com.zjht.adv.hprose.biz"></context:component-scan>
+		<!-- hprose暴露外部调用方法 -->
+		<context:component-scan base-package="com.zjht.adv.hprose.server.impl"></context:component-scan>
+		<!-- Controller声明 -->
+		<!-- servlet -->
+		<context:component-scan base-package="com.zjht.adv.hprose.servlet"></context:component-scan>
+		<!-- epay hprose 接口服务类 -->
+		<bean id="mfehClient" class="com.zjht.adv.hprose.client.MethodForEpayHproseClient"></bean>
+		<!-- ftp下载pos机文件 -->
+		<bean id="ftpUtils" class="com.zjht.adv.util.FTPUtils"></bean>
+</beans>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<#include "../head.html"/>
+  </head>
+  
+  <body>
+	<#include "../common/image_upload.html"/>
+  	
+	<@p.form id="jvForm" labelWidth="12">
+	<@p.td colspan="2" label="测试上传">
+	&nbsp;<input type="text" id="uploadImgPath1" name="image_url1" readonly="readonly" class="required" maxlength="255" style="width:300px;"/>
+	<span id="ufc1"><input type="file" id="uploadFile1"/></span><input type="button" value="上传" onclick="upload(1);"/><input type="hidden" name="mark1" id="mark1" value="false"/>
+	<br/>
+	<#include "../common/alert_message.html"/>
+	<img id="preImg1" alt="预览" noResize="true" style="overflow:hidden;width:90px;height:90px;background-color:#ccc;border:1px solid #333"/>
+	</@p.td><@p.tr/>
+	<@p.editor colspan="2" label="注意事项" name="text1"/><@p.tr/>
+	</@p.form>
+  </body>
+</html>

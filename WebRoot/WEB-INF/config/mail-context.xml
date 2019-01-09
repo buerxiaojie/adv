@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "spring-beans.dtd" >
+<beans>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host">
+			<value>mail.zjhtc.com</value>
+		</property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+		<property name="username">
+			<value>dev</value>
+		</property>
+		<property name="password">
+			<value>express8500</value>
+		</property>
+	</bean>
+
+	<!-- 发送的类 -->
+	<bean id="simpleMailSender" class="com.zjht.adv.util.SimpleMailSender">
+		<property name="mailSender">
+			<ref bean="mailSender" />
+		</property>
+	</bean>
+</beans>

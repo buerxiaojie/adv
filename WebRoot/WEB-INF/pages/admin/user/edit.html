@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>add.html</title>
+<#include "../head.html"/>
+</head>
+<body>
+<div class="body-box">
+<div class="rhead">
+<div class="box-positon">
+	<div class="rpos"><@s.m "global.position"/>: 用户管理 - <@s.m "global.add"/></div>
+	<form class="ropt">
+		<input type="submit" value="<@s.m "global.backToList"/>" onclick="this.form.action='v_list.do';" class="return-button"/>
+	</form>
+	<div class="clear"></div>
+</div>
+</div>
+<@p.form id="jvForm" action="o_edit.do" method="post" labelWidth="12"><input type="hidden" name="id" value="${user.id!}" />
+<@p.td label="用户名" colspan="2" noHeight="true">
+${user.userName!}
+</@p.td><@p.tr/>
+<@p.text width="50" colspan="1" label="邮箱" style="width:180px" name="email" value="${user.email!}" /><@p.tr/>
+<@p.text width="50" colspan="1" label="电话" style="width:180px" name="mobile" value="${user.mobile!}" /><@p.tr/>
+<@p.radio colspan="1" width="50" label="状态" name="status" value="${user.status!'1'}" list={"1":"启用","0":"失效","2":"锁定"}/><@p.tr/>
+<@p.checkboxlist label="权限" list=roleList valueList=user.listRoles name="roles" listKey="id" listValue="roleName" /><@p.tr/>
+<@p.td label="上级管理员" colspan="2" noHeight="true">
+<select name="parentUserId">
+	<option value="" <#if !user.parentUser??>selected="selected"</#if>>--无--</option>
+	<#list rootUsers as userItem>
+	<option value="${userItem.id}" <#if user.parentUser?? && user.parentUser.id==userItem.id>selected="selected"</#if>>${userItem.userName!}</option>
+	</#list>
+</select>
+</@p.td><@p.tr/>
+<@p.td colspan="1">
+	<@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/>
+</@p.td>
+</@p.form>
+</div>
+<#if opResult??>
+<script type="text/javascript"/>
+alert("<@s.mt code=opResult text=opResult/>");
+</script>
+<#elseif message??>
+<script type="text/javascript"/>
+if(!confirm("<@s.mt code=message text=message/>")){window.location.href="v_list.do";}
+</script>
+</#if>
+</body>
+</html>

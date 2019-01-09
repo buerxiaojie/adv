@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>add.html</title>
+<#include "../head.html"/>
+	<script type="text/javascript">
+		$(function() {
+			$.validator.addMethod("decimal", function (value, element, param) {
+				var reg = /^-?[0-9]+(\.[0-9]{1,2})?$/;
+				return reg.test(value);
+			},"最多只能保留2小数");
+			$.validator.addMethod("beint", function (value, element, param) {
+				var reg = /^-?[0-9]+$/;
+				if($.trim(value)==''){return true;}
+				return reg.test(value);
+			},"必须是正整数");
+			$("#jvForm").validate();
+		});
+	</script>
+</head>
+<body>
+<#include "../common/image_upload.html"/>
+<div class="body-box">
+<div class="rhead">
+<div class="box-positon">
+	<div class="rpos"><@s.m "global.position"/>: 广告管理 - <@s.m "global.add"/></div>
+	<form class="ropt">
+		<input type="submit" value="<@s.m "global.backToList"/>" onclick="this.form.action='v_list.do';" class="return-button"/>
+	</form>
+	<div class="clear"></div>
+</div>
+</div>
+<@p.form id="jvForm" action="o_add.do" method="post" labelWidth="12">
+<@p.text colspan="1" width="50" label="名称" name="advName" size="80" value="${adv.advName!}" required="true" class="{required:true}"/>
+<@p.select colspan="1" width="50" label="摆放位置"  name="positionId" value=(adv.position.id)! list=(apList) listKey="id" listValue="name" /><@p.tr/>
+<@p.td colspan="2" label="广告内容" required="true">
+<div id="attr_image2">
+<p class="attr">
+链接目标:<@p.radio name="advTarget" value="${adv.advTarget!'_self'}" list={"_blank":"新窗口","_self":"原窗口"}/> 
+</p>
+<p class="attr">链接提示: <input type="text" style="width:300px;" maxlength="255" value="${adv.advTip!}" name="advTip"></p>
+<p class="attr">链接地址: <input type="text" style="width:300px;" maxlength="255" value="${adv.advLink!}" name="advLink"></p>
+<p class="attr">图片上传:<input type="text" id="uploadImgPath2" name="advImg" value="${adv.advImg!}" class="{required:true}" maxlength="255" style="width:300px;"/><span id="ufc2"><input type="file" id="uploadFile2"/></span> <input type="button" value="上传" onclick="upload(2);"/><input type="hidden" id="mark2" value="false"/></p>
+<p><img id="preImg2" alt="预览" noResize="true" <#if adv.advImg?? && adv.advImg?length gt 0> src="${uploadRoot}${adv.advImg!}"</#if> style="background-color:#ccc;border:1px solid #333;max-width: 800px;"/></p>
+</div>
+</@p.td>
+<@p.tr/>
+<@p.radio colspan="1" width="50" label="状态" name="advStatus" value="${adv.advStatus!'1'}" list={"1":"启用","0":"禁用"}/>
+<@p.text colspan="1" width="50" label="排序" name="advSort" value="${adv.advSort!1}" required="true" class="{required:true,beint:true}"/><@p.tr/>
+<@p.td colspan="2">
+	<@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/>
+</@p.td>
+</@p.form>
+</div>
+<#if opResult??>
+<script type="text/javascript"/>
+alert("<@s.mt code=opResult text=opResult/>");
+</script>
+<#elseif message??>
+<script type="text/javascript"/>
+if(!confirm("<@s.mt code=message text=message/>")){window.location.href="v_list.do";}
+</script>
+</#if>
+</body>
+</html>

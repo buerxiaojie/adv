@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+<#include "../head.html"/>
+<script type="text/javascript">
+function getTableForm() {
+	return document.getElementById('tableForm');
+}
+function optDelete() {
+	if(Pn.checkedCount('ids')<=0) {
+		alert("<@s.m "error.checkRecord"/>");
+		return;
+	}
+	if(!confirm("<@s.m "global.confirm.delete"/>")) {
+		return;
+	}
+	var f = getTableForm();
+	f.action="o_delete.do";
+	f.submit();
+}
+</script>
+</head>
+<body>
+<div class="body-box">
+<div class="rhead">
+<div class="box-positon">
+	<div class="rpos"><@s.m "global.position"/>: 日志管理 - <@s.m "global.list"/></div>
+	<div class="clear"></div>
+</div>
+</div>
+<div class="rhead">
+	<form action="v_list.do" id="searchForm">
+	 <div style="padding-top:5px">
+	 	用户名:
+		<input type="text" name="userName" maxlength="100" value="${userName!}" style="width:100px;">
+		操作：
+		<@p.select name="type" value="${type!''}" list={"":" -- ","1":"登录","2":"保存","3":"删除","4":"修改","5":"其他"} />
+		开始时间:
+		<input type="text" name="startTime" value="${startTime!}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:100px"/>
+		结束时间：
+		<input type="text" name="endTime" value="${endTime!}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:100px"/>
+		<input type="submit" name="query"  class="ropt" value="<@s.m "global.query"/>" />
+		</div>
+	</form>
+	<div class="clear"></div>
+</div>
+<form id="tableForm" method="post">
+<input type="hidden" name="pageNo" value="${pageNo!}"/>
+<input type="hidden" name="userName" value="${userName!}">
+<input type="hidden" name="type" value="${type!}"/>
+<input type="hidden" name="startTime" value="${startTime!}"/>
+<input type="hidden" name="endTime" value="${endTime!}"/>
+<@p.table value=pagination;adminLog,i,has_next><#rt/>
+	<@p.column title="<input type='checkbox' onclick='Pn.checkbox(\"ids\",this.checked)'/>" width="20">
+		<input type='checkbox' name='ids' value='${adminLog.id}'/><#t/>
+	</@p.column><#t/>
+	<@p.column title="用户名" align="center"><#if adminLog.user??>${adminLog.user.userName!'--'}<#else>--</#if></@p.column><#t/>
+	<@p.column title="内容" align="center" width="600">${adminLog.details!"--"}</@p.column><#t/>
+	<@p.column title="操作" align="center">${adminLog.typeStr!'--'}</@p.column><#t/>
+	<@p.column title="结果" align="center">${adminLog.resultStr!'--'}</@p.column><#t/>
+	<@p.column title="时间" align="center">${adminLog.time?string("yyyy-MM-dd")}</@p.column><#t/>
+</@p.table>
+</form>
+</div>
+<#if opResult??>
+<script type="text/javascript"/>
+alert("<@s.mt code=opResult text=opResult/>");
+</script>
+</#if>
+</body>
+</html>

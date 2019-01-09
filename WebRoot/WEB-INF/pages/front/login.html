@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>登录</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+</head>
+<body>
+<div class="w1000px mod_herd">
+  <a href="/"><img src="${base}/res/front/ver2013/images/com/logo.jpg" /></a>
+  <a href="http://www.zjhtc.com" target="_blank"><img src="/res/front/ver2013/images/com/Zj_logo.jpg" /></a>
+</div>
+<div class="mod_login_wp">
+   <div class="w1000px mod_login_bd">  
+     <div class="fl"><img src="${base}/res/front/ver2013/images/local/logoBan.png" /></div>
+     <form method="post" action="login.do" id="indexLoginForm" >
+     <input type="hidden" name="returnUrl" value="${returnUrl!}" />
+     <div class="fr"> 
+      <div class="loginBox">
+        <h3>会员登录</h3>
+        <ul class="Htb_form">
+           <li>
+             <span>登录名：</span> 
+             <div class="ipt_bd">
+               <input type="text" class="inpt" name="userName" value="${userName!}" id="userName"/>
+             </div>
+                        
+           </li>
+                      
+           <li>
+             <span>密 码：</span> 
+             <div class="ipt_bd">
+               <input type="password" class="inpt" name="userPwd" value="${userPwd!}" id="userPwd" />
+             </div>
+           </li>
+          <li><input type="submit" class="btn" value="登 录" /> <a href="/front/register/resetpassword.do" class="p_btn">忘记密码？</a></li>
+        </ul>
+        <p class="txt">还不是翼汇通会员？ <a href="/front/register/register.do" class="col_55">免费注册</a></p>
+      </div>   
+     </div>
+    <div class="clearfix"></div> 
+    </form>
+	</div>    
+<div class="foot">
+</div>
+</div>
+</body>
+</html>

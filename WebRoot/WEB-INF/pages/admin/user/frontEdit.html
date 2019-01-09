@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>add.html</title>
+<#include "../head.html"/>
+</head>
+<body>
+<div class="body-box">
+<div class="rhead">
+<div class="box-positon">
+	<div class="rpos"><@s.m "global.position"/>: 用户管理 - <@s.m "global.add"/></div>
+	<form class="ropt">
+		<input type="submit" value="<@s.m "global.backToList"/>" onclick="this.form.action='v_list.do';" class="return-button"/>
+	</form>
+	<div class="clear"></div>
+</div>
+</div>
+<@p.form id="jvForm" action="o_frontEdit.do" method="post" labelWidth="12"><input type="hidden" name="id" value="${user.id!}" />
+<@p.td label="用户名" colspan="2" noHeight="true">
+	${user.userName!}
+</@p.td><@p.tr/>
+<@p.radio colspan="1" width="50" label="状态" name="status" value="${user.status!'1'}" list={"1":"启用","0":"失效","2":"锁定"}/><@p.tr/>
+<@p.td colspan="1">
+	<@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/>
+</@p.td>
+</@p.form>
+</div>
+<#if opResult??>
+<script type="text/javascript"/>
+alert("<@s.mt code=opResult text=opResult/>");
+</script>
+<#elseif message??>
+<script type="text/javascript"/>
+if(!confirm("<@s.mt code=message text=message/>")){window.location.href="frontList.do";}
+</script>
+</#if>
+</body>
+</html>

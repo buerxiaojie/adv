@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>广告管理平台</title>
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/res/admin/v2015/css/common.css">
+<link rel="stylesheet" href="/res/admin/v2015/css/style.css">
+<link href="/res/admin/v2015/css/pony.tree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/res/admin/v2015/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/res/admin/v2015/js/jquery.SuperSlide.js"></script>
+<script src="/res/admin/v2015/js/pony.js" type="text/javascript"></script>
+<script src="/res/admin/v2015/js/pony.tree.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="top">
+		<div id="top_t">
+			<div id="logo" class="fl"><span>广告管理系统</span></div>
+			<div id="photo_info" class="fr">
+				<div id="photo" class="fl">
+					<!--<a href="#"><img src="images/a.png" alt="" width="60" height="60"></a>-->
+				</div>
+				<div class="fr">
+					<div class="info_right">
+						您好,${admin.userName}
+						<a href="logout.do" onclick="return confirm('您确定要退出登录吗？');">退出</a>
+						<!--<span id="nt">通知</span><span><a href="#" id="notice">3</a></span>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="side_here">
+			<div id="side_here_l" class="fl"></div>
+			<div id="here_area" class="fl">功能视图</div>
+		</div>
+	</div>
+	<!-- 左侧菜单开始 -->
+	<#include 'include/left.html'/>
+	<!-- 左侧菜单结束 -->
+	<div class="main">
+		<iframe name="rightFrame" id="rightFrame" src="main.do" frameborder="no"
+			scrolling="auto" width="100%" height="auto" allowtransparency="true"></iframe>
+	</div>
+	<div class="bottom">
+		<div id="bottom_bg">v2015版权</div>
+	</div>
+	<div class="scroll">
+		<a href="javascript:;" class="per" title="使用鼠标滚轴滚动侧栏"
+			onclick="menuScroll(1);"></a> <a href="javascript:;" class="next"
+			title="使用鼠标滚轴滚动侧栏" onclick="menuScroll(2);"></a>
+	</div>
+</body>
+</html>

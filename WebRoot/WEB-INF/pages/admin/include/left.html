@@ -1,0 +1,95 @@
+<div class="side">
+	<div class="sideMenu" style="margin:0 auto">
+		<@MenuList>
+		<#if tag_list?? && tag_list?size gt 0>
+		<#list tag_list as parent>
+		<#if parent.name=="首页">
+		<h3><a href="main.do" target="rightFrame">${parent.name!}</a></h3>
+		<#else>
+		<h3>${parent.name!}</h3>
+		</#if>
+		<ul>
+		<@MenuList rootId=parent.id! path=parent.path!>
+		<#if tag_bean??>
+		<#assign treeRoot=tag_bean />
+		<div style="text-align: center; padding: 5px 5px;">
+		<a href="javascript:location.reload()"><@s.m "global.refresh"/></a>
+		</div>
+		<@p.tree root=treeRoot showDeep=1 url="template/v_edit" durl="template/v_list" childName="child" treeName="name" leafName="file" dparams={"relPath":"relPath"} params={"relPath":"relPath"}/>
+		<#elseif tag_list?? && tag_list?size gt 0>
+		<#list tag_list as child>
+		<li><a href="${child.path!}" target="rightFrame">${child.name!}</a>
+		</#list>
+		</#if>
+		</@MenuList>
+		</ul>
+		</#list>
+		</#if>
+		</@MenuList>
+	</div>
+</div>
+<script type="text/javascript">
+  $(function(){
+      $(".sideMenu").slide({
+		 type:"slide",
+         titCell:"h3", 
+         targetCell:"ul",
+         effect:'slideDown', 
+         delayTime:'500' , 
+         trigger:'click', 
+         triggerTime:'100', 
+         defaultPlay:true, 
+         returnDefault:false,
+         easing:'swing',
+         endFun:function(){
+              scrollWW();
+         }
+       });
+      $(window).resize(function() {
+          scrollWW();
+      });
+      
+      $(".sideMenu ul li a").click(function(){
+      	 $(this).parents("ul").find("li").removeClass("on");
+     	 $(this).parents("ul").siblings().find("li").removeClass("on");
+    	 $(this).parent().addClass("on");
+      });
+      $(".sideMenu h3 a").click(function(){
+      	 $(this).parents("h3").siblings("ul").find("li").removeClass("on");
+      });
+  });
+  function scrollWW(){
+    if($(".side").height()<$(".sideMenu").height()){
+       $(".scroll").show();
+       var pos = $(".sideMenu ul:visible").position().top-38;
+       $('.sideMenu').animate({top:-pos});
+    }else{
+       $(".scroll").hide();
+       $('.sideMenu').animate({top:0});
+       n=1;
+    }
+  } 
+
+var n=1;
+function menuScroll(num){
+  var Scroll = $('.sideMenu');
+  var ScrollP = $('.sideMenu').position();
+  
+  if(num==1){//上
+     Scroll.animate({top:ScrollP.top-74},"fast");
+     n = n+1;
+  }else{//下
+    if (ScrollP.top > -74 && ScrollP.top != 0) { 
+		ScrollP.top = -74; 
+	}
+    if (ScrollP.top<0) {
+      Scroll.animate({top:74+ScrollP.top},"fast");
+    }else{
+      n=1;
+    }
+    if(n>1){
+      n = n-1;
+    }
+  }
+}
+</script>

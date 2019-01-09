@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+<#include "../head.html"/>
+<script type="text/javascript">
+function getTableForm() {
+	return document.getElementById('tableForm');
+}
+</script>
+</head>
+<body>
+<div class="body-box">
+<div class="rhead">
+<div class="box-positon">
+	<div class="rpos"><@s.m "global.position"/>: 注册用户管理 - <@s.m "global.list"/></div>
+	<form class="ropt">
+		<input class="add" type="submit" value="<@s.m "global.add"/>" onclick="this.form.action='v_add.do';"/>
+	</form>
+	<div class="clear"></div>
+</div>
+</div>
+<div class="rhead">
+	<form action="v_list.do" id="searchForm">
+	 <div style="padding-top:5px">
+	 	用户名:
+		<input type="text" name="userName" maxlength="100" value="${user.userName!}" style="width:100px;">
+		手机号码:
+		<input type="text" name="mobile" maxlength="100" value="${user.mobile!}" style="width:100px;">
+		<input type="submit" name="query"  class="ropt" value="<@s.m "global.query"/>" />
+		</div>
+	</form>
+	<div class="clear"></div>
+</div>
+<form id="tableForm" method="post">
+<input type="hidden" name="pageNo" value="${pageNo!}"/>
+<input type="hidden" name="userName" value="${user.advName!}">
+<input type="hidden" name="mobile" value="${user.mobile!}"/>
+<@p.table value=pagination;useres,i,has_next><#rt/>
+	<@p.column title="用户名" align="center">${useres.userName!}</@p.column><#t/>
+	<@p.column title="手机号码" align="center">${useres.mobile!"暂无"}</@p.column><#t/>
+	<@p.column title="邮箱" align="center">${useres.email!'--'}</@p.column><#t/>
+	<@p.column title="状态" align="center">${useres.statusStr!0}</@p.column><#t/>
+	<@p.column title="创建时间" align="center">${useres.createTime!'--'}</@p.column><#t/>
+	<@p.column code="global.operate" align="center">
+		<a href="v_edit.do?id=${useres.id}" class="pn-opt"><@s.m "global.edit"/></a>
+	</@p.column><#t/>
+</@p.table>
+</form>
+</div>
+<#if opResult??>
+<script type="text/javascript"/>
+alert("<@s.mt code=opResult text=opResult/>");
+</script>
+</#if>
+</body>
+</html>

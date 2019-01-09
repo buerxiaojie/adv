@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+
+		<bean id="provinceDao" class="com.zjht.adv.dao.impl.ProvinceDaoImpl"></bean>
+		<bean id="cityDao" class="com.zjht.adv.dao.impl.CityDaoImpl"></bean>
+		<bean id="areaDao" class="com.zjht.adv.dao.impl.AreaDaoImpl"></bean>
+		<bean id="userDao" class="com.zjht.adv.dao.impl.UserDaoImpl"></bean>
+		<bean id="mobileVerifyDao" class="com.zjht.adv.dao.impl.MobileVerifyDaoImpl"></bean>
+		<bean id="addressDao" class="com.zjht.adv.dao.impl.AddressDaoImpl"></bean>
+		<bean id="informationDao" class="com.zjht.adv.dao.impl.InformationDaoImpl"></bean>
+		<bean id="advertiseDao" class="com.zjht.adv.dao.impl.AdvertiseDaoImpl"></bean>
+		<bean id="adminLogDao" class="com.zjht.adv.dao.impl.AdminLogDaoImpl"></bean>
+		<bean id="roleDao" class="com.zjht.adv.dao.impl.RoleDaoImpl"></bean>
+		<bean id="menuDao" class="com.zjht.adv.dao.impl.SysMenuDaoImpl"></bean>
+		<bean id="roleMenuDao" class="com.zjht.adv.dao.impl.RoleMenuDaoImpl"></bean>
+		<bean id="userRoleDao" class="com.zjht.adv.dao.impl.UserRoleDaoImpl"></bean>
+		<bean id="advPositionDao" class="com.zjht.adv.dao.impl.AdvPositionDaoImpl"></bean>
+		<bean id="apiChannelDao" class="com.zjht.adv.dao.impl.ApiChannelDaoImpl"></bean>
+		<bean id="apiChannelServiceDao" class="com.zjht.adv.dao.impl.ApiChannelServiceDaoImpl"></bean>
+</beans>

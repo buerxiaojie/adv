@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="shortcut icon" href="/favicon.ico" />
+<title>广告后台管理系统</title>
+<link rel="stylesheet" href="/res/admin/v2015/css/login.css">
+<script src="/res/admin/v2015/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$('#userName').focus();
+	$("#imgcode").click(function(e){
+		document.getElementById("imgcode").src = "random.do?d=" + new Date().getTime();
+	});
+	$("#myloginform").submit(function(e){
+		e.preventDefault();
+		if($.trim($('#userName').val())==""){
+			alert("请输入用户名！");
+			$('#userName').focus();
+			return;
+		}
+		if($.trim($('#userPwd').val())==""){
+			alert("请输入密码！");
+			$('#userPwd').focus();
+			return;
+		}
+		if($.trim($('#code').val())==""){
+			alert("请输入验证码！");
+			$('#code').focus();
+			return;
+		}
+		$.post("verifyImgCode.do",{code:$("#code").val()},function(data){
+			if (data.status=="-1") {
+				alert(data.msg);
+				$('#code').select();
+			}else{
+				$.post("login.do",$("#myloginform").serialize(),function(result){
+					if (result.status=="-1") {
+						alert(result.msg);
+						$("#imgcode").click();
+					}else{
+						window.location.href=result.autoUrl;
+					}
+				},"json");
+			}
+		},"json");
+	});
+});
+</script>
+</head>
+<body>
+	<div id="login_top">
+		<!-- <div id="welcome">广告管理系统</div> -->
+		<div id="back">
+			<a href="javascript:alert('正在开发中')">首页</a>
+		</div>
+	</div>
+	<div id="login_center">
+		<div id="login_area">
+			<div id="login_form">
+				<form id="myloginform" action="login.do" method="post">
+					<div id="login_tip">用户登录</div>
+					<div>
+						<input type="text" id="userName" name="userName" class="username" />
+					</div>
+					<div>
+						<input type="password" id="userPwd" name="userPwd" class="pwd" />
+					</div>
+					<div id="btn_area">
+						<input type="text" id="code" name="code" maxlength="4" class="verify" />
+						<img id="imgcode" src="random.do" alt="" width="80" height="40" title="再来一个" />
+						<input type="submit" name="btnSumbit" id="sub_btn" value="登&nbsp;&nbsp;录" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="login_bottom">中经汇通版权所有 粤ICP备11077680号 Copyright 2015 Allrights reserved</div>
+</body>
+</html>

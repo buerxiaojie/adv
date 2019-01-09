@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>add.html</title>
+<#include "../head.html"/>
+	<script type="text/javascript">
+		$(function() {
+			$.validator.addMethod("checkpfir", function (value, element, param) {
+				var checkflag=false;
+				var patrn=/^[0-9]+$/;  
+				if (!patrn.exec(value)){checkflag=true;}
+				return checkflag;
+			},"密码不能全部为数字");
+			$.validator.addMethod("checkpsec", function (value, element, param) {
+				var checkflag=false;
+				var patrn=/^([a-zA-Z0-9]|[_]){5,20}$/;
+				if (patrn.exec(value)){checkflag=true;}
+				return checkflag;
+			},"密码必须输入5-20个字母、数字、下划线");
+			$("#jvForm").validate();
+		});
+	</script>
+</head>
+<body>
+<div class="body-box">
+<div class="rhead">
+<div class="box-positon">
+	<div class="rpos"><@s.m "global.position"/>: 用户管理 - <@s.m "global.add"/></div>
+	<form class="ropt">
+		<input type="submit" value="<@s.m "global.backToList"/>" onclick="this.form.action='v_list.do';" class="return-button"/>
+	</form>
+	<div class="clear"></div>
+</div>
+</div>
+<@p.form id="jvForm" action="o_add.do" method="post" labelWidth="12">
+<@p.text colspan="1" width="50" label="用户名" name="userName" required="true" class="{required:true}"/><@p.tr/>
+<@p.password width="50" colspan="1" label="用户密码" style="width:180px" id="userPwd" name="userPwd" required="true" class="{required:true,checkpfir:true,checkpsec:true}" /><@p.tr/>
+<@p.password width="50" colspan="1" label="确认密码" style="width:180px" name="userPwdToo" required="true" class="{required:true,equalTo:'#userPwd'}" /><@p.tr/>
+<@p.text width="50" colspan="1" label="邮箱" style="width:180px" name="email" /><@p.tr/>
+<@p.text width="50" colspan="1" label="电话" style="width:180px" name="mobile" /><@p.tr/>
+<@p.checkboxlist label="权限" list=roleList name="roles" listKey="id" listValue="roleName"/><@p.tr/>
+<@p.td label="上级管理员" colspan="1" noHeight="true">
+<select name="parentUserId">
+	<option value="" selected="selected">--无--</option>
+	<#list rootUsers as userItem>
+	<option value="${userItem.id}">${userItem.userName!}</option>
+	</#list>
+</select>
+</@p.td><@p.tr/>
+<@p.td colspan="1">
+	<@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/>
+</@p.td>
+</@p.form>
+</div>
+<#if opResult??>
+<script type="text/javascript"/>
+alert("<@s.mt code=opResult text=opResult/>");
+</script>
+<#elseif message??>
+<script type="text/javascript"/>
+if(!confirm("<@s.mt code=message text=message/>")){window.location.href="v_list.do";}
+</script>
+</#if>
+</body>
+</html>

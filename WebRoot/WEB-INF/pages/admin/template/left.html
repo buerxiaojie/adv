@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+<#include "../head.html"/>
+<script type="text/javascript">
+$(function(){
+	JCore.lmenu('lmenu');
+});
+</script>
+</head>
+<body class="lbody">
+<div class="lttop">
+	<a href="javascript:location.reload()"><@s.m "global.refresh"/></a>
+</div>
+<hr/>
+<@p.tree root=treeRoot showDeep=1 url="v_edit" durl="v_list"
+	childName="child" treeName="name" leafName="file" dparams={"relPath":"relPath"} params={"relPath":"relPath"}/>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>错误页面</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="[@p.path type='css' src='base_2014.css'/]">
+	<link rel="stylesheet" type="text/css" href="[@p.path type='css' src='common_2014.css'/]">
+	<script type="text/javascript" src="[@p.path type='js_common' src='jquery-1.7.2.min.js'/]"></script>
+	<script type="text/javascript" src="[@p.path type='js' src='global.js'/]"></script>
+</head>
+<body>
+[#include "../include/top.html"/]
+[#include "../include/logo.html"/]
+[#include "../include/nav.html"/]
+<div class="Htb_hint w1000px">
+  <div style="padding:60px 0 300px 0">
+       <em></em> <span>很抱歉，
+		[#list errors as error]
+			${error!}
+		[/#list]</span>
+       <p>如有疑问，请致电客服热线400-6630666/800-8830666!</p>
+    </div>
+</div>
+[#include "../include/copyright.html"/]
+</body>
+</html>
